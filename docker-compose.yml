@@ -3,7 +3,8 @@ services:
   ubuntu:
     build:
       context: .
-    container_name: ubuntu
+    image: drujensen/riscv-ubuntu:latest
+    platform: linux/riscv64
     volumes:
       - "./workspace:/root/workspace"
       - "~/.vimrc:/root/.vimrc"
