@@ -5,6 +5,8 @@ services:
       context: .
     image: drujensen/riscv-ubuntu:latest
     platform: linux/riscv64
+    ports:
+      - 5900:5900
     volumes:
       - "./workspace:/root/workspace"
       - "~/.vimrc:/root/.vimrc"
