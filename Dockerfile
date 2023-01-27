@@ -23,4 +23,4 @@ RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
 
 WORKDIR /root
 
-ENTRYPOINT x11vnc -forever -usepw -create & /bin/bash
+CMD ["x11vnc", "-forever", "-usepw", "-create"] 
