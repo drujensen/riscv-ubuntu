@@ -39,4 +39,4 @@ COPY vim /root/.vim
 
 EXPOSE 5900
 
-CMD ["x11vnc", "-forever", "-usepw", "-create"]
+CMD ["x11vnc", "-repeat", "-forever", "-usepw", "-create"]
