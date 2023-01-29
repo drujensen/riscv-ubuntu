@@ -19,7 +19,6 @@ RUN apt update -qq && apt install -y --no-install-recommends \
     dbus-x11 \
     net-tools \
     x11-utils \
-    firefox \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust
@@ -29,11 +28,14 @@ RUN echo "export PATH=$PATH:/root/.cargo/bin" >> ~/.bashrc
 # VNC server
 RUN mkdir ~/.vnc
 RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
-RUN echo "geometry=1920x1080\ndpi=96" > ~/.vnc/config
 RUN echo "xfce4-session" > ~/.xinitrc
 RUN chmod +x ~/.xinitrc
 
 WORKDIR /root
+
+COPY bashrc /root/.bashrc
+COPY vimrc /root/.vimrc
+COPY vim /root/.vim
 
 EXPOSE 5900
 
