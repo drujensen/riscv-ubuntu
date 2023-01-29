@@ -1,6 +1,5 @@
 call plug#begin()
 " features
-Plug 'rking/ag.vim'
 Plug 'bling/vim-airline'
 Plug 'Chiel92/vim-autoformat'
 Plug 'kien/ctrlp.vim'

@@ -10,7 +10,6 @@ RUN apt update -qq && apt install -y --no-install-recommends \
     curl \
     wget \
     vim \
-    ruby \
     xvfb \
     x11vnc \
     xfce4 \
@@ -19,11 +18,33 @@ RUN apt update -qq && apt install -y --no-install-recommends \
     dbus-x11 \
     net-tools \
     x11-utils \
+    software-properties-common \
+    dirmngr \
+    apt-transport-https \
+    lsb-release \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /root
+
+# Install Ruby
+RUN apt update -qq && apt install -y --no-install-recommends \
+    ruby-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python3
+RUN apt update -qq && apt install -y --no-install-recommends \
+    python3-dev \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Rust
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN echo "export PATH=$PATH:/root/.cargo/bin" >> ~/.bashrc
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
 
 # VNC server
 RUN mkdir ~/.vnc
@@ -31,8 +52,7 @@ RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
 RUN echo "xfce4-session" > ~/.xinitrc
 RUN chmod +x ~/.xinitrc
 
-WORKDIR /root
-
+# Setup development environment
 COPY bashrc /root/.bashrc
 COPY vimrc /root/.vimrc
 COPY vim /root/.vim

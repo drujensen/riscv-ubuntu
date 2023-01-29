@@ -100,3 +100,4 @@ fi
 
 . "$HOME/.cargo/env"
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.cargo/bin
+export PATH=$PATH:/root/workspace/ninja
