@@ -42,9 +42,9 @@ RUN apt update -qq && apt install -y --no-install-recommends \
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN echo "export PATH=$PATH:/root/.cargo/bin" >> ~/.bashrc
 
-# Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
+# Install Node.js (not yet supported)
+# RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+# RUN apt-get install -y nodejs
 
 # VNC server
 RUN mkdir ~/.vnc
