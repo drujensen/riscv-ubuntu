@@ -46,6 +46,11 @@ RUN echo "export PATH=$PATH:/root/.cargo/bin" >> ~/.bashrc
 # RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
 # RUN apt-get install -y nodejs
 
+# Install Epiphany Browser
+RUN apt update -qq && apt install -y --no-install-recommends \
+    epiphany-browser \
+    && rm -rf /var/lib/apt/lists/*
+
 # VNC server
 RUN mkdir ~/.vnc
 RUN x11vnc -storepasswd 1234 ~/.vnc/passwd
