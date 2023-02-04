@@ -26,7 +26,7 @@ The docker image supports VNC.
 docker run --platform linux/riscv64 -it drujensen/riscv-ubuntu
 ```
 
-You can connect to localhost:5900 with a VNC client.  The default password is `1234`.
+You can connect to `vnc://localhost:5900` with a VNC client.  The default password is `1234`.
 
 ## Using Docker Compose
 
