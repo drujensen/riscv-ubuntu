@@ -1,10 +1,10 @@
-# Run RISC-V debian linux using docker with vim development environment
+# Run RISC-V Ubuntu using Docker or Docker Compose
 
-This project builds a docker image with vim and other tools for RISC-V development.
+This project provides a docker image with tools for RISC-V development.
 
-Some of the tools pre-installed in the image are vim, gcc, ruby, python3, and rust.  
+Some of the tools pre-installed on the image are vim, gcc toolchain, ruby, python3, and rust.  
 
-I've also included a desktop environment with epiphany browser (only one I could find that supports riscv64).
+I've also included a desktop environment xfce and epiphany browser (only one I could find that supports riscv64).
 
 ## Install
 
