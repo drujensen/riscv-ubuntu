@@ -1,4 +1,4 @@
-# Run RISC-V Ubuntu using Docker or Docker Compose
+# Run RISCV Ubuntu using Docker or Docker Compose
 
 This project provides a docker image with tools for RISC-V development.
 
