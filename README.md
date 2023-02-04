@@ -33,7 +33,7 @@ You can connect to `vnc://localhost:5900` with a VNC client.  The default passwo
 The docker-compose.yml file is included in the project.  You can use it to build the image and run the container.
 
 ```bash
-git clone drujensen/riscv-ubuntu
+git clone https://github.com/drujensen/riscv-ubuntu.git
 docker-compose build
 docker-compose up
 ```
