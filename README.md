@@ -2,7 +2,7 @@
 
 This project provides a docker image with tools for RISC-V development.
 
-Some of the tools pre-installed on the image are vim, gcc toolchain, ruby, python3, and rust.  
+Some of the languages pre-installed on the image are gcc, go, rust, java, python, nodejs and ruby.  
 
 I've also included a desktop environment xfce and epiphany browser (only one I could find that supports riscv64).
 
