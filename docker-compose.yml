@@ -9,6 +9,5 @@ services:
       - 5900:5900
     volumes:
       - "./workspace:/root/workspace"
-      - "./bashrc:/root/.bashrc"
       - "./vimrc:/root/.vimrc"
       - "./vim:/root/.vim"

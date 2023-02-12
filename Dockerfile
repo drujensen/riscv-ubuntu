@@ -2,30 +2,48 @@ FROM riscv64/ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
+WORKDIR /root
+
 RUN apt update -qq && apt install -y --no-install-recommends \
-    build-essential \
+    software-properties-common \
+    apt-transport-https \
     ca-certificates \
-    cmake \
+    lsb-release \
+    net-tools \
+    dirmngr \
+    gnupg \
     git \
     curl \
     wget \
+    file \
+    unzip \
+    zip \
     vim \
-    xvfb \
-    x11vnc \
-    xfce4 \
-    xfce4-goodies \
-    at-spi2-core \
-    dbus-x11 \
-    net-tools \
-    x11-utils \
-    software-properties-common \
-    dirmngr \
-    apt-transport-https \
-    lsb-release \
-    gnupg \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root
+# Install C/C++
+RUN apt update -qq && apt install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    autoconf \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Rust
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN echo 'source $HOME/.cargo/env' >> $HOME/.bashrc
+
+# Install Go
+RUN wget http://ftp.ports.debian.org/debian-ports/pool/main/g/golang-1.19/golang-1.19-src_1.19.5-1_all.deb && \
+    dpkg -i golang-1.19-src_1.19.5-1_all.deb && \
+    rm golang-1.19-src_1.19.5-1_all.deb
+RUN wget http://ftp.ports.debian.org/debian-ports/pool-riscv64/main/g/golang-1.19/golang-1.19-go_1.19.5-1_riscv64.deb && \
+    dpkg -i golang-1.19-go_1.19.5-1_riscv64.deb && \
+    rm golang-1.19-go_1.19.5-1_riscv64.deb
+
+# Install Java
+RUN apt update -qq && apt install -y --no-install-recommends \
+    openjdk-17-jdk \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Ruby
 RUN apt update -qq && apt install -y --no-install-recommends \
@@ -38,16 +56,23 @@ RUN apt update -qq && apt install -y --no-install-recommends \
     python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Rust
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-RUN echo "export PATH=$PATH:/root/.cargo/bin" >> ~/.bashrc
+# Install Node.js
+RUN wget https://github.com/v8-riscv/node/releases/download/v14.8.0-riscv64/node-v14.8.0-linux-riscv64.tar.xz && \
+    tar -C /usr/local -xJf node-v14.8.0-linux-riscv64.tar.xz && \
+    rm node-v14.8.0-linux-riscv64.tar.xz
 
-# Install Node.js (not yet supported)
-# RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
-# RUN apt-get install -y nodejs
+# PATH
+RUN echo "export PATH=$PATH:/root/.cargo/bin:/usr/lib/go-1.19/bin:/usr/local/node-v14.8.0-linux-riscv64/bin" >> ~/.bashrc
 
-# Install Epiphany Browser
+# Install xvfb
 RUN apt update -qq && apt install -y --no-install-recommends \
+    xvfb \
+    x11vnc \
+    xfce4 \
+    xfce4-goodies \
+    at-spi2-core \
+    dbus-x11 \
+    x11-utils \
     epiphany-browser \
     && rm -rf /var/lib/apt/lists/*
 
@@ -58,7 +83,6 @@ RUN echo "xfce4-session" > ~/.xinitrc
 RUN chmod +x ~/.xinitrc
 
 # Setup development environment
-COPY bashrc /root/.bashrc
 COPY vimrc /root/.vimrc
 COPY vim /root/.vim
 
