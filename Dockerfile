@@ -41,9 +41,12 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool-riscv64/main/g/golang-1.1
     rm golang-1.19-go_1.19.5-1_riscv64.deb
 
 # Install Java
-RUN apt update -qq && apt install -y --no-install-recommends \
-    openjdk-17-jdk \
-    && rm -rf /var/lib/apt/lists/*
+RUN curl -s https://raw.githubusercontent.com/jjlauer/provisioning/master/linux/bootstrap-java.sh | sh
+
+# OpenJDK 17 is interpretor only
+#RUN apt update -qq && apt install -y --no-install-recommends \
+#    openjdk-17-jdk \
+#    && rm -rf /var/lib/apt/lists/*
 
 # Install Ruby
 RUN apt update -qq && apt install -y --no-install-recommends \
@@ -62,7 +65,7 @@ RUN wget https://github.com/v8-riscv/node/releases/download/v14.8.0-riscv64/node
     rm node-v14.8.0-linux-riscv64.tar.xz
 
 # PATH
-RUN echo "export PATH=$PATH:/root/.cargo/bin:/usr/lib/go-1.19/bin:/usr/local/node-v14.8.0-linux-riscv64/bin" >> ~/.bashrc
+RUN echo "export PATH=$PATH:/root/.cargo/bin:/usr/lib/go-1.19/bin:/usr/local/node-v14.8.0-linux-riscv64/bin:/usr/lib/jvm/current" >> ~/.bashrc
 
 # Install xvfb
 RUN apt update -qq && apt install -y --no-install-recommends \
