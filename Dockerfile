@@ -40,13 +40,10 @@ RUN wget http://ftp.ports.debian.org/debian-ports/pool-riscv64/main/g/golang-1.1
     dpkg -i golang-1.19-go_1.19.5-1_riscv64.deb && \
     rm golang-1.19-go_1.19.5-1_riscv64.deb
 
-# Install Java
-RUN curl -s https://raw.githubusercontent.com/jjlauer/provisioning/master/linux/bootstrap-java.sh | sh
-
 # OpenJDK 17 is interpretor only
-#RUN apt update -qq && apt install -y --no-install-recommends \
-#    openjdk-17-jdk \
-#    && rm -rf /var/lib/apt/lists/*
+RUN apt update -qq && apt install -y --no-install-recommends \
+    openjdk-19-jdk \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Ruby
 RUN apt update -qq && apt install -y --no-install-recommends \
